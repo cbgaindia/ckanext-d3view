@@ -1,0 +1,3 @@
+include README.rst
+include requirements.txt
+recursive-include ckanext/d3view *.html *.json *.js *.less *.css *.woff *.woff2 *.ttf *.config *.bcmap *.svg *.png *.cur *.gif *.properties *.yml

@@ -1,0 +1,17 @@
+dataviz_script2:
+  filters: rjsmin
+  output: dataviz/dataviz_%(version)s_graph.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - dataviz2.js
+    - d3.v3.min.js
+    - d3-tip.min.js
+
+dataviz_style_graph:
+  output: dataviz/dataviz_%(version)s_graph.css
+  contents:
+    - dataviz2.css
+    - content_1.css
+    - vis.css
