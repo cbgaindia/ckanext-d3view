@@ -11,10 +11,10 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
     // YES
 
   /* Variable Declarations */
-  const actuals = "Actuals 2018-19",
-    bePrev = "Budget 2019-20",
-    re = "Revised 2019-20",
-    be = "Budget 2020-21";
+  const actuals = "Actuals 2017-18",
+    bePrev = "Budget 2018-19",
+    re = "Revised 2018-19",
+    be = "Budget 2019-20";
 
   const hierarchy = 'Grant Number, Major Head, Sub Major Head, Minor Head, Sub Head, Sub Sub Head, Detail Head, Sub detail Head'.split(",");
 
@@ -488,6 +488,43 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
     populateYearSelection(data);
   }
 
+
+   // datatable
+   function loadDataTable(data){
+	    data.forEach(function(d){
+		d['Head Description in English'] =   d['Head Description in English'].split("$").join(" | ")
+
+	    })
+	    let tableSelect = d3.select('#container-data').append("table")
+	    .attr("class", "table table-striped table-bordered responsive")
+	    .attr("id", "exp_table")
+	    .style("width","100%"); 
+	    
+	    let selectedColumns = "Head Of Account,Head Description in English".split(",").concat(fiscalYearList);
+
+	    let tableColumns = [];
+	    for(let i in selectedColumns){
+		let temp = {}
+		temp["data"] = selectedColumns[i]
+		temp["title"] = selectedColumns[i]
+		tableColumns.push(temp)
+	    }
+
+	    $('#exp_table').DataTable( {
+		"processing": true,
+		responsive: true,
+		"bLengthChange": false, // Disable page size change
+		data: data,
+		columns: tableColumns,
+		dom: 'Bfrtip',
+		buttons :['csvHtml5',
+		'excelHtml5',
+		'pdfHtml5']
+	    });
+	}
+
+
+
   (function() {
     d3.csv(download_url, function(data) {
 
@@ -495,6 +532,7 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
       console.log(data)
       loadHierarchyVis(data, be);
       d3.select(".dataset-download").attr("href", download_url);
+      loadDataTable(data);
     });
   })();
 

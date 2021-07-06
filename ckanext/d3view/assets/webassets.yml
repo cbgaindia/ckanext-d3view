@@ -8,6 +8,7 @@ dataviz_script2:
     - dataviz2.js
     - d3.v3.min.js
     - d3-tip.min.js
+    - jquery.dataTables.min.js
 
 dataviz_style_graph:
   output: dataviz/dataviz_%(version)s_graph.css
@@ -15,3 +16,5 @@ dataviz_style_graph:
     - dataviz2.css
     - content_1.css
     - vis.css
+    - datatable.css
+    - jquery.dataTables.min.css
