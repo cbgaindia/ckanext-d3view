@@ -62,6 +62,39 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
     return (v >= .9995e7 ? formatCrore : v >= .9995e5 ? formatLakh : v >= .999e3 ? formatThousand : formatLowerDenom)(x);
   }
 
+  function formatLongNumbertoString(x) {
+    let negative = x < 0,
+        str = String(negative ? -x : x),
+        arr = [],
+        i = str.indexOf("."),
+        j;
+
+    if (i === -1) {
+        i = str.length;
+    } else {
+        for (j = str.length - 1; j > i; j--) {
+            arr.push(str[j]);
+        }
+        arr.push(".");
+    }
+    i--;
+
+    for (j = 0; i >= 0; i--, j++) {
+        if (j > 2 && (j % 2 === 1)) {
+            arr.push(",");
+        }
+        arr.push(str[i]);
+    }
+
+    if (negative) {
+        arr.push("-");
+    }
+    return arr.reverse().join("");
+  };
+
+
+
+
   function formatUnit(d){
     if(d<100)
     {
@@ -74,6 +107,134 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
     }
   }
 
+
+  /* Grant summary */
+
+   function loadGrantSummary(raw_data) {
+	    let data = d3.nest()
+		.key(function(d) { return d["Major"]; })
+		.rollup(function(v) {
+		    return {
+			act: d3.sum(v, function(d) { return +d[actuals]; }),
+			be: d3.sum(v, function(d) { return +d[be]; }),
+			bePrev: d3.sum(v, function(d) { return +d[bePrev]; }),
+			re: d3.sum(v, function(d) { return +d[re]; })
+		    };
+		})
+		.entries(raw_data);
+	    //add_grant_summary(nested_data);
+
+	    let totalExpenditure = {};
+	    totalExpenditure["key"] = "Total Expenditure";
+	    totalExpenditure["values"] = [];
+	    let temp = {};
+	    temp["label"] = actuals;
+	    temp["value"] = data[0].values.act;
+	    totalExpenditure["values"].push(temp);
+
+	    temp = {};
+	    temp["label"] =bePrev;
+	    temp["value"] = data[0].values.re;
+	    totalExpenditure["values"].push(temp);
+
+	    temp = {};
+	    temp["label"] = re;
+	    temp["value"] = data[0].values.bePrev;
+	    totalExpenditure["values"].push(temp);
+
+	    
+	    temp = {};
+	    temp["label"] = be;
+	    temp["value"] = data[0].values.be;
+	    temp["series"] = 0;
+	    totalExpenditure["values"].push(temp);
+	    d3.select("#be-figures").html(function(d) {
+		let content = "<span class='absolute-figure'>" + currencySymbol + " " + formatLongNumbertoString(formatUnit(data[0].values.be)) + " <span class='curreny-unit'>" + currentUnit + "</span> </span><br>";
+
+		let percentageChange = (((data[0].values.be - data[0].values.bePrev) / data[0].values.bePrev) * 100).toFixed(1);
+
+		content += "<span class='percentage-figures'>";
+		    if (percentageChange > 0) {
+		    content += "<i class='fas fa-arrow-up positive-fig'></i> "
+		} 
+		else if(percentageChange == 0){
+		    content += "<i class='fas nochange-fig'></i> "
+		}
+		else {
+		    content += "<i class='fas fa-arrow-down negative-fig'></i> "
+		}
+		content += "<span class='percentage-num" + (percentageChange > 0 ? " positive-fig'" : " negative-fig'") + ">" + percentageChange + "%" + "</span></span>"
+		return content;
+	    })
+
+	    d3.select("#re-figures").html(currencySymbol + " " + formatLongNumbertoString(formatUnit(data[0].values.re)) + " <span class='curreny-unit'>" + currentUnit + "</span> ");
+
+	    d3.select("#actuals-figures").html(currencySymbol + " " + formatLongNumbertoString(formatUnit(data[0].values.act)) + " <span class='curreny-unit'>" + currentUnit + "</span> ");
+
+	    d3.select("#bePrev-figures").html(currencySymbol + " " + formatLongNumbertoString(formatUnit(data[0].values.bePrev)) + " <span class='curreny-unit'>" + currentUnit + "</span> ");
+
+	    drawbarchart([totalExpenditure], ".summary_vis");
+
+	    function drawbarchart(data, selection) {
+
+		nv.addGraph(function() {
+		    chart = nv.models.multiBarHorizontalChart()
+			.x(function(d) { return d.label })
+			.y(function(d) { return +d.value * 100000 }) //Fix Unit Issue
+			.barColor(["#d64700", "#fdba38",'#21405d','#rgb(116, 173, 209)'])
+
+			.duration(250)
+			
+			.margin({ left: 130, right: 75, top: 20, bottom: 30 })
+			.stacked(false)
+			.showControls(false)
+			.showLegend(false);
+
+		    chart.height(130)
+		    chart.yAxis.tickPadding(8);
+		    chart.yAxis.ticks(2).tickFormat(function(d) {
+			return formatCurrency(d)
+		    });
+
+		    chart.yAxis.axisLabel("Figures in " + currencyUnit)
+
+		    
+			
+		    chart.tooltip.valueFormatter(function(d) {
+			    return d.toFixed(1) + " " + currencyUnit;
+			})
+
+		    chart.tooltip.contentGenerator(function(obj) {
+			console.log(obj)
+			console.log(obj.color)
+			var header = obj.series[0].key
+			var headerhtml = "<div class='row'><div class='col-lg-12'><div class='tooltip-point-title'style='background-color: " + obj.color + ";'>" + obj.data.label+ "</div></div></div>"
+
+			var bodyhtml = "<div class='row'><div class='col-lg-12 text-center'><div class='tooltip-point-body'><span class='tooltip-x-val'>" + header + "</span><span class='tooltip-y-value'>"+ "₹"+ " " + obj.data.value.toFixed(1) + " " + currencyUnit + "</span></div></div>";
+
+			return headerhtml + '' + bodyhtml;
+		    })
+
+		    chart.tooltip.enabled(true)
+		    
+		    
+
+		    if (w < 400) {
+			chart.yAxis.ticks(2)
+		    }
+
+		    d3.select(selection).append("svg")
+			.datum(data)
+			.call(chart);
+		    nv.utils.windowResize(chart.update);
+
+		    return chart;
+		});
+	    }
+	}
+
+
+  /* Hierarcy Viz   */
   function loadHierarchyVis(data, fiscalYear) {
 
     let margin = { top: 30, right: 40, bottom: 0, left: 170 },
@@ -489,7 +650,7 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
   }
 
 
-   // datatable
+   /* Data table */
    function loadDataTable(data){
 	    data.forEach(function(d){
 		d['Head Description in English'] =   d['Head Description in English'].split("$").join(" | ")
@@ -529,9 +690,15 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
     d3.csv(download_url, function(data) {
 
       onDataLoad();
+
+      loadGrantSummary(data);
+
       console.log(data)
+
       loadHierarchyVis(data, be);
+
       d3.select(".dataset-download").attr("href", download_url);
+
       loadDataTable(data);
     });
   })();

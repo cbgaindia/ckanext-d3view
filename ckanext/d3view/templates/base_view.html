@@ -27,6 +27,74 @@
             <div class="container">
                 <div class="content-main-card col-lg-12">
                     <div class="grant-content-wrapper" style="display: none">
+
+                       <!--grant summary -->
+		       <section class="grant-summary">
+			    <div class="container">
+				<div class="row">
+				    <div class="section-side-title">
+				        <h3 class="section-side-title-text">Receipts Summary</h3>
+				        <div class="grant-summary-info help-modal" data-toggle="modal" data-target="#exampleModal">
+				            <div class="section-side-title-help" >
+				                    <i class="fas fa-info"></i>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+			    </div>
+			
+			    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+				    <div class="modal-content">
+				        <div class="modal-header">
+				            
+				            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				                <span aria-hidden="true"></span>
+				            </button>
+				        </div>
+				        <div class="modal-body">
+				                This section presents the aggregate receipts for the state of Assam in the budget of 2019-20    
+				        </div>
+				        <div class="modal-footer">
+				            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				        </div>
+				    </div>
+				</div>
+			    </div>
+			    <div class="summary summary-jumbotron">
+		      
+				<div class="row">
+				    <div class="col-lg-4 ">
+				            <div class="summary_vis"></div>
+				    </div>
+				    <div class="col-lg-5 offset-lg-1">
+				            <h5 class="summary-indicator-title">Budget 2019-20</h5>
+				            <div class="big-figures" id="be-figures"></div>
+				            
+				            </div>
+				</div>            
+				<div class="row justify-content-md-center">
+				    <div class="col-lg-3">
+				            <h5 class="summary-sec-indicator-title">Revised 2018-19</h5>
+				            <div class=" secondary-big-figures" id="re-figures"></div>
+				    </div>
+				    <div class="col-lg-3 ">
+				            <h5 class="summary-sec-indicator-title">Actuals 2017-18</h5>
+				            <div class="secondary-big-figures" id="actuals-figures"></div>    
+				    </div>
+				    <div class="col-lg-3">
+				    <h5 class="summary-sec-indicator-title">Budget 2018-19</h5>
+				        <div class=" secondary-big-figures" id="bePrev-figures"></div>
+				    </div>
+		    
+				</div>
+			    </div>
+			</section>
+
+
+
+
+                        <!-- grant bar chart-->
                         <section class="grant-barchart">
                             <div class="container">
                                 <div class="row section-topbar">
@@ -71,6 +139,7 @@
                             </div>
                         </section>
 
+			<!-- data table-->
 			<div class="container">
 				<div class="row">
 				        <div class="section-side-title">
