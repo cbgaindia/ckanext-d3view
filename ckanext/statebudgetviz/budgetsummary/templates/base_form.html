@@ -1,0 +1,9 @@
+{% import 'macros/form.html' as form %}
+
+{% block form %}
+
+{{ form.input('chart_title', label=_('Chart title'), placeholder=_('Optional'), value=resource_view['chart_title'], error=error, classes=[]) }}
+{{ form.input('x_axis_title', label=_('X Axis title'), placeholder=_('Optional'), value=resource_view['x_axis_title'], error=error, classes=[]) }}
+{{ form.input('y_axis_title', label=_('Y Axis title'), placeholder=_('Optional'), value=resource_view['y_axis_title'], error=error, classes=[]) }}
+
+{% endblock %}

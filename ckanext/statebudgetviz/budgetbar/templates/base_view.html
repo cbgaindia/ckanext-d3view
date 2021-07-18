@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
-{% asset 'dataviz/dataviz_style_graph' %}
+{% asset 'budgetbar/dataviz/dataviz_style_graph' %}
 {% endblock %}
 
 <div class="base-wrapper" data-module="dataviz_view" data-module-resource-view="{{ h.dump_json(resource_view) }}">
@@ -28,78 +28,13 @@
                 <div class="content-main-card col-lg-12">
                     <div class="grant-content-wrapper" style="display: none">
 
-                       <!--grant summary -->
-		       <section class="grant-summary">
-			    <div class="container">
-				<div class="row">
-				    <div class="section-side-title">
-				        <h3 class="section-side-title-text">Receipts Summary</h3>
-				        <div class="grant-summary-info help-modal" data-toggle="modal" data-target="#exampleModal">
-				            <div class="section-side-title-help" >
-				                    <i class="fas fa-info"></i>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-			    </div>
-			
-			    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-centered" role="document">
-				    <div class="modal-content">
-				        <div class="modal-header">
-				            
-				            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				                <span aria-hidden="true"></span>
-				            </button>
-				        </div>
-				        <div class="modal-body">
-				                This section presents the aggregate receipts for the state of Assam in the budget of 2019-20    
-				        </div>
-				        <div class="modal-footer">
-				            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				        </div>
-				    </div>
-				</div>
-			    </div>
-			    <div class="summary summary-jumbotron">
-		      
-				<div class="row">
-				    <div class="col-lg-4 ">
-				            <div class="summary_vis"></div>
-				    </div>
-				    <div class="col-lg-5 offset-lg-1">
-				            <h5 class="summary-indicator-title">Budget 2019-20</h5>
-				            <div class="big-figures" id="be-figures"></div>
-				            
-				            </div>
-				</div>            
-				<div class="row justify-content-md-center">
-				    <div class="col-lg-3">
-				            <h5 class="summary-sec-indicator-title">Revised 2018-19</h5>
-				            <div class=" secondary-big-figures" id="re-figures"></div>
-				    </div>
-				    <div class="col-lg-3 ">
-				            <h5 class="summary-sec-indicator-title">Actuals 2017-18</h5>
-				            <div class="secondary-big-figures" id="actuals-figures"></div>    
-				    </div>
-				    <div class="col-lg-3">
-				    <h5 class="summary-sec-indicator-title">Budget 2018-19</h5>
-				        <div class=" secondary-big-figures" id="bePrev-figures"></div>
-				    </div>
-		    
-				</div>
-			    </div>
-			</section>
-
-
-
 
                         <!-- grant bar chart-->
                         <section class="grant-barchart">
                             <div class="container">
                                 <div class="row section-topbar">
                                     <div class="col-lg-6 offset-lg-1 section-topbar-text">
-                                        Select Fiscal Year
+                                        Select Fiscal Year1
                                     </div>
                                     <div class="col-lg-6 offset-lg-1">
                                         <div class="select-dropdown"></div>
@@ -139,30 +74,6 @@
                             </div>
                         </section>
 
-			<!-- data table-->
-			<div class="container">
-				<div class="row">
-				        <div class="section-side-title">
-				            <h3 class="section-side-title-text">Data Table </h3>
-				       
-				             
-				            
-				        </div>
-				</div>
-				<div class="row">
-				    <div class="col-lg-12 offset-lg-1" style="text-align:right;padding-right: 135px">
-				        Note : Figures are in Lakh(s)
-				    </div>
-				</div>
-			    <div class="row" style="padding-right:30px;padding-left:30px">
-				<div class="data-table-section" id='container-data'>
-				    
-				</div>
-			    </div>
-			    
-			</div>
-
-                    </div>
                     <div class="d-flex justify-content-center">
                         <div class="spinner">
                             <div class="bounce1"></div>
@@ -176,5 +87,5 @@
     </div>
 </div>
 
-{% asset 'dataviz/dataviz_script2' %}
+{% asset 'budgetbar/dataviz/dataviz_script2' %}
 {% endblock %}

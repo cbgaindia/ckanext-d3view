@@ -1,0 +1,12 @@
+.nv-x text{
+    font-weight: bolder;
+    fill: black;
+}
+.nv-y text{
+    font-weight: bolder;
+    fill:black;
+}
+
+body {
+    background: white;
+}

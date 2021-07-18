@@ -80,7 +80,9 @@ setup(
     # pip to create the appropriate form of executable for the target platform.
     entry_points='''
         [ckan.plugins]
-        d3view=ckanext.d3view.plugin:DataVizBaseView
+        budgetsummary=ckanext.statebudgetviz.plugin:BudgetSummary
+	budgetbar=ckanext.statebudgetviz.plugin:BudgetBar
+	budgettable=ckanext.statebudgetviz.plugin:BudgetTable
     ''',
 
     # If you are changing from the default layout of your extension, you may

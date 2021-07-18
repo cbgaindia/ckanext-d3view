@@ -1,6 +1,6 @@
 dataviz_script2:
   filters: rjsmin
-  output: dataviz/dataviz_%(version)s_graph.js
+  output: budgetbar/dataviz/dataviz_%(version)s_graph.js
   extra:
     preload:
       - base/main
@@ -13,7 +13,7 @@ dataviz_script2:
     
 
 dataviz_style_graph:
-  output: dataviz/dataviz_%(version)s_graph.css
+  output: budgetbar/dataviz/dataviz_%(version)s_graph.css
   contents:
     - dataviz2.css
     - nv.d3.css
