@@ -691,12 +691,6 @@ this.ckan.module('dataviz_view', function (JQuery, _) {
 
       onDataLoad();
 
-      loadGrantSummary(data);
-
-      console.log(data)
-
-      loadHierarchyVis(data, be);
-
       d3.select(".dataset-download").attr("href", download_url);
 
       loadDataTable(data);

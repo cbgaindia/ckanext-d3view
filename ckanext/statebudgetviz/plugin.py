@@ -37,7 +37,7 @@ class BudgetSummary(p.SingletonPlugin):
         return resource.get(u'datastore_active')
 
     def view_template(self, context, data_dict):
-        return u'base_view.html'
+        return u'summary_base_view.html'
 
     def form_template(self, context, data_dict):
         return u'base_form.html'
@@ -98,7 +98,7 @@ class BudgetBar(p.SingletonPlugin):
         return resource.get(u'datastore_active')
 
     def view_template(self, context, data_dict):
-        return u'base_view.html'
+        return u'bar_base_view.html'
 
     def form_template(self, context, data_dict):
         return u'base_form.html'
@@ -158,7 +158,7 @@ class BudgetTable(p.SingletonPlugin):
         return resource.get(u'datastore_active')
 
     def view_template(self, context, data_dict):
-        return u'base_view.html'
+        return u'table_base_view.html'
 
     def form_template(self, context, data_dict):
         return u'base_form.html'

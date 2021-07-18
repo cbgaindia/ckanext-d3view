@@ -18,7 +18,7 @@
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
 
-{% asset 'budgettable/dataviz/dataviz_style_graph' %}
+{% asset 'budgetsummary/dataviz/dataviz_style_graph' %}
 {% endblock %}
 
 <div class="base-wrapper" data-module="dataviz_view" data-module-resource-view="{{ h.dump_json(resource_view) }}">
@@ -91,77 +91,6 @@
 			    </div>
 			</section>
 
-
-
-
-                        <!-- grant bar chart-->
-                        <section class="grant-barchart">
-                            <div class="container">
-                                <div class="row section-topbar">
-                                    <div class="col-lg-6 offset-lg-1 section-topbar-text">
-                                        Select Fiscal Year
-                                    </div>
-                                    <div class="col-lg-6 offset-lg-1">
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-3 side-col d-none d-md-block ">
-                                        <div class="side-navbar"data-step="1" data-intro="Select to move down in hierarchy"  data-position='right'>
-                                            <div class="row">
-                                                <div class="side-navbar-head">
-                                                    <div class="back">
-                                                        <i class="fas fa-level-up-alt"></i>
-                                                    </div>
-                                                    <div class="side-navbar-title">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="side-navbar-list">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="row">
-                                            <nav aria-label="breadcrumb" class="nav-breadcrumb col-lg-12" data-step="3" data-intro="Select to move down in hierarchy"  data-position='bottom'>
-                                                <ol class="breadcrumb">
-                                                </ol>
-                                            </nav>
-                                        </div>
-                                        <div class="vis"data-step="2" data-intro="Click on the bars to move forward"  data-position='left'>
-                                            <svg></svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-			<!-- data table-->
-			<div class="container">
-				<div class="row">
-				        <div class="section-side-title">
-				            <h3 class="section-side-title-text">Data Table </h3>
-				       
-				             
-				            
-				        </div>
-				</div>
-				<div class="row">
-				    <div class="col-lg-12 offset-lg-1" style="text-align:right;padding-right: 135px">
-				        Note : Figures are in Lakh(s)
-				    </div>
-				</div>
-			    <div class="row" style="padding-right:30px;padding-left:30px">
-				<div class="data-table-section" id='container-data'>
-				    
-				</div>
-			    </div>
-			    
-			</div>
-
                     </div>
                     <div class="d-flex justify-content-center">
                         <div class="spinner">
@@ -176,5 +105,5 @@
     </div>
 </div>
 
-{% asset 'budgettable/dataviz/dataviz_script2' %}
+{% asset 'budgetsummary/dataviz/dataviz_script2' %}
 {% endblock %}
