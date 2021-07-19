@@ -24,7 +24,7 @@ Installation
 
 To install ckanext-d3view:
 
-##### Checkout dev branch for latest changes
+**Checkout dev branch for latest changes**
 
 1. Activate your CKAN virtual environment, for example::
 
